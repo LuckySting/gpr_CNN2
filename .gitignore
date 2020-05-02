@@ -1,0 +1,5 @@
+# Project exclude paths
+/venv/
+unet_membrane.hdf5
+.idea
+/training_set/
