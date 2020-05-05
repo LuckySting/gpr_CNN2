@@ -6,7 +6,7 @@ from unet import unet
 train_generator = data_generator('training_set', 1, 200, flip=True)
 test_generator = data_generator('training_set', 205, 5, flip=True)
 
-weight_name = 'test'
+weight_name = 'first_generation_4'
 
 model = unet()
 
