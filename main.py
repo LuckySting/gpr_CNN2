@@ -15,4 +15,4 @@ model_checkpoint = ModelCheckpoint('{}.hdf5'.format(weight_name), monitor='loss'
 model.fit_generator(train_generator, steps_per_epoch=200, epochs=200, callbacks=[model_checkpoint])
 result = model.predict_generator(test_generator, steps=5, verbose=1)
 
-save_result('./{}'.format(weight_name), result, 205)
+save_result(result, start=205, path='./{}'.format(weight_name))

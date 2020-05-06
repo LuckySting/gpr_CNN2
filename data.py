@@ -13,7 +13,7 @@ def format_image(image):
     return image
 
 
-def data_generator(path, start, length, flip=False):
+def data_generator(path, start, length, flip=False, limit=None, rescale=True):
     i = 0
     random = Random()
     while True:
@@ -23,17 +23,26 @@ def data_generator(path, start, length, flip=False):
         if flip and random.randint(1, 2) == 1:
             img_x = np.flip(img_x, axis=1)
             img_y = np.flip(img_y, axis=1)
-        img_x = format_image(img_x)
-        img_y = format_image(img_y)
+        if rescale:
+            img_x = format_image(img_x)
+            img_y = format_image(img_y)
         i += 1
         yield img_x, img_y
+        if limit == i:
+            break
 
 
-def save_result(path, result, start=1):
+def res_image(img):
+    max_v = np.max(img)
+    img /= max_v
+    img *= 255
+    return img
+
+
+def save_result(result, start=1, path='.'):
     if not os.path.isdir(path):
         os.mkdir(path)
+
     for i, img in enumerate(result):
-        max_v = np.max(img)
-        img /= max_v
-        img *= 255
-        io.imsave(os.path.join(path, 'predict_{}.png'.format(start + i)), img)
+        io.imsave(os.path.join(path, 'predict_{}.png'.format(start + i)), res_image(img))
+
