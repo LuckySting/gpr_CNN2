@@ -5,11 +5,11 @@ from post_processing import post_processing
 import numpy as np
 import skimage.transform as trans
 
-start = 50
-length = 20
+start = 20
+length = 5
 test_generator = data_generator('training_set', start, length)
 model = unet()
-weight_name = 'second_generation_1'
+weight_name = 'second_generation_2'
 model.load_weights('{}.hdf5'.format(weight_name))
 result = model.predict_generator(test_generator, steps=length, verbose=1)
 for i, img in enumerate(result):

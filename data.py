@@ -32,6 +32,23 @@ def data_generator(path, start, length, flip=False, limit=None, rescale=True):
             break
 
 
+def data_generator2(y_dict, path, start, length, flip=False, limit=None, rescale=True):
+    i = 0
+    random = Random()
+    while True:
+        ind = (start + i) % (start + length)
+        img_name = os.path.join(path, 'in', 'x', 'out_{}.png'.format(ind))
+        img_x = io.imread(img_name, as_gray=True)
+        y = np.array(y_dict['out_{}.png'.format(ind)]) / 256
+        y = np.reshape(y, (1, 3))
+        if flip and random.randint(1, 2) == 1:
+            img_x = np.flip(img_x, axis=1)
+        if rescale:
+            img_x = format_image(img_x)
+        i += 1
+        yield img_x, y
+
+
 def res_image(img):
     max_v = np.max(img)
     img /= max_v
