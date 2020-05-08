@@ -36,7 +36,7 @@ def data_generator2(y_dict, path, start, length, flip=False, limit=None, rescale
     i = 0
     random = Random()
     while True:
-        ind = (start + i) % (start + length)
+        ind = (start + i) % (start + length) + 1
         img_name = os.path.join(path, 'in', 'x', 'out_{}.png'.format(ind))
         img_x = io.imread(img_name, as_gray=True)
         y = np.array(y_dict['out_{}.png'.format(ind)]) / 256

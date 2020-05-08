@@ -9,7 +9,7 @@ file = open('training_set6\in\y.json')
 y_dict = json.load(file)
 file.close()
 
-train_generator = data_generator2(y_dict, 'training_set6', 1, 410, flip=True)
+train_generator = data_generator2(y_dict, 'training_set6', 0, 410, flip=True)
 test_generator = data_generator2(y_dict, 'training_set6', 410, 10, flip=True)
 
 weight_name = 'third_generation_1'
